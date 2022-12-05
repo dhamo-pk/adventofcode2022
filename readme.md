@@ -1,5 +1,7 @@
+# Advent of Code - 2022
+
 https://adventofcode.com/
 
-YEAR: 2022
+Well, there are many ways to solve a problem and this is one of the "hyge" ways of doing it (in my busier schedule). 
 
-Other day solutions are done in MS-Excel itself ;)
+Other solutions are done in MS-Excel itself ;) 
