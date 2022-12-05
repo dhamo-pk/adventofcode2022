@@ -9,15 +9,51 @@ import java.util.Stack;
 
 public class Day05_2 {
     /*
-               [C]         [N] [R]    
-   [J] [T]     [H]         [P] [L]    
-   [F] [S] [T] [B]         [M] [D]    
-   [C] [L] [J] [Z] [S]     [L] [B]    
-    [N] [Q] [G] [J] [J]     [F] [F] [R]
-   [D] [V] [B] [L] [B] [Q] [D] [M] [T]
-   [B] [Z] [Z] [T] [V] [S] [V] [S] [D]
-   [W] [P] [P] [D] [G] [P] [B] [P] [V]
-    1   2   3   4   5   6   7   8   9 
+    --- Part Two ---
+As you watch the crane operator expertly rearrange the crates, you notice the process isn't following your prediction.
+
+Some mud was covering the writing on the side of the crane, and you quickly wipe it away. The crane isn't a CrateMover 9000 - it's a CrateMover 9001.
+
+The CrateMover 9001 is notable for many new and exciting features: air conditioning, leather seats, an extra cup holder, and the ability to pick up and move multiple crates at once.
+
+Again considering the example above, the crates begin in the same configuration:
+
+    [D]
+[N] [C]
+[Z] [M] [P]
+ 1   2   3
+Moving a single crate from stack 2 to stack 1 behaves the same as before:
+
+[D]
+[N] [C]
+[Z] [M] [P]
+ 1   2   3
+However, the action of moving three crates from stack 1 to stack 3 means that those three moved crates stay in the same order, resulting in this new configuration:
+
+        [D]
+        [N]
+    [C] [Z]
+    [M] [P]
+ 1   2   3
+Next, as both crates are moved from stack 2 to stack 1, they retain their order as well:
+
+        [D]
+        [N]
+[C]     [Z]
+[M]     [P]
+ 1   2   3
+Finally, a single crate is still moved from stack 1 to stack 2, but now it's crate C that gets moved:
+
+        [D]
+        [N]
+        [Z]
+[M] [C] [P]
+ 1   2   3
+In this example, the CrateMover 9001 has put the crates in a totally different order: MCD.
+
+Before the rearrangement process finishes, update your simulation so that the Elves know where they should stand to be ready to unload the final supplies. After the rearrangement procedure completes, what crate ends up on top of each stack?
+
+Your puzzle answer was TPFFBDRJD.
      */
     public static void main(String[] args) throws IOException {
         Stack<String> sk1 = new Stack();
@@ -143,8 +179,7 @@ public class Day05_2 {
         move 1 from 1 to 2*/
         String finalValue = performMovement(moveKeys, arrStacks1);
         System.out.println("FinalValue:" + finalValue);
-        //1ST HWSVNZNDS
-    }
+     }
 
     private static String performMovement(ArrayList<String> moveInstructions, ArrayList<Stack> arrStacks) {
 
@@ -178,13 +213,11 @@ public class Day05_2 {
                 System.out.println("----");
                 System.out.println(arrStacks);
             }
-
         }
               String finalValue= "";
         for(int x= 0; x<arrStacks.size();x++) {
            finalValue = finalValue + arrStacks.get(x).get(arrStacks.get(x).size()-1);
-        }                                                             
-
+        }
         return finalValue;
     }
 }

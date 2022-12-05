@@ -1,30 +1,24 @@
 package org.example;
 
 import java.io.*;
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
 
-public class Question3Part1 {
-
+public class Day03_1 {
     public static void main(String[] args) throws IOException {
 
-        System.out.println("Q1");
         File inputFile = new File("src/main/resources/Q3_1_input.txt");
 
         Scanner sc = new Scanner(inputFile);
         sc.useDelimiter("\\Z");
         String aa = sc.next();
-        System.out.println(aa);
         List<String> actualValue = List.of(aa.split(System.lineSeparator()));
-        //System.out.println(actualValue.size());
-        //System.out.println(actualValue);
+
         int sum = 0;
         for (String str : actualValue) {
             sum = sum + makeCalculation(str);
         }
-        System.out.println("Sum is " +sum);
+        System.out.println("Sum is " + sum);
     }
 
     private static int makeCalculation(String value) {
@@ -32,8 +26,7 @@ public class Question3Part1 {
         int len = value.length();
         String firstHalf = value.substring(0, len / 2);
         String secondHalf = value.substring(len / 2);
-        //System.out.println("FirstHalf:" + firstHalf);
-        //System.out.println("SecondHalf:" + secondHalf);
+
         char temp = 0;
 
         char[] fhAsChars = firstHalf.toCharArray();
@@ -48,12 +41,12 @@ public class Question3Part1 {
         }
         if (Character.isUpperCase(temp)) {
             //27-52
-            priorityValue = temp - 'A' +27;
-            System.out.println(temp - 'A' +27);
+            priorityValue = temp - 'A' + 27;
+            System.out.println(temp - 'A' + 27);
         } else {
             //1-26
-            priorityValue = temp - 'a' +1;
-            System.out.println(temp - 'a'+1);
+            priorityValue = temp - 'a' + 1;
+            System.out.println(temp - 'a' + 1);
         }
         return priorityValue;
     }

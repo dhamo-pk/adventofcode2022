@@ -5,27 +5,70 @@ import java.util.ArrayList;
 import java.util.Stack;
 
 public class Day05_1 {
-    /*
-               [C]         [N] [R]    
-   [J] [T]     [H]         [P] [L]    
-   [F] [S] [T] [B]         [M] [D]    
-   [C] [L] [J] [Z] [S]     [L] [B]    
-    [N] [Q] [G] [J] [J]     [F] [F] [R]
-   [D] [V] [B] [L] [B] [Q] [D] [M] [T]
-   [B] [Z] [Z] [T] [V] [S] [V] [S] [D]
-   [W] [P] [P] [D] [G] [P] [B] [P] [V]
-    1   2   3   4   5   6   7   8   9 
+
+    /*Day 5: Supply Stacks ---
+The expedition can depart as soon as the final supplies have been unloaded from the ships. Supplies are stored in stacks of marked crates, but because the needed supplies are buried under many other crates, the crates need to be rearranged.
+
+The ship has a giant cargo crane capable of moving crates between stacks. To ensure none of the crates get crushed or fall over, the crane operator will rearrange them in a series of carefully-planned steps. After the crates are rearranged, the desired crates will be at the top of each stack.
+
+The Elves don't want to interrupt the crane operator during this delicate procedure, but they forgot to ask her which crate will end up where, and they want to be ready to unload them as soon as possible so they can embark.
+
+They do, however, have a drawing of the starting stacks of crates and the rearrangement procedure (your puzzle input). For example:
+
+    [D]
+[N] [C]
+[Z] [M] [P]
+ 1   2   3
+
+move 1 from 2 to 1
+move 3 from 1 to 3
+move 2 from 2 to 1
+move 1 from 1 to 2
+In this example, there are three stacks of crates. Stack 1 contains two crates: crate Z is on the bottom, and crate N is on top. Stack 2 contains three crates; from bottom to top, they are crates M, C, and D. Finally, stack 3 contains a single crate, P.
+
+Then, the rearrangement procedure is given. In each step of the procedure, a quantity of crates is moved from one stack to a different stack. In the first step of the above rearrangement procedure, one crate is moved from stack 2 to stack 1, resulting in this configuration:
+
+[D]
+[N] [C]
+[Z] [M] [P]
+ 1   2   3
+In the second step, three crates are moved from stack 1 to stack 3. Crates are moved one at a time, so the first crate to be moved (D) ends up below the second and third crates:
+
+        [Z]
+        [N]
+    [C] [D]
+    [M] [P]
+ 1   2   3
+Then, both crates are moved from stack 2 to stack 1. Again, because crates are moved one at a time, crate C ends up below crate M:
+
+        [Z]
+        [N]
+[M]     [D]
+[C]     [P]
+ 1   2   3
+Finally, one crate is moved from stack 1 to stack 2:
+
+        [Z]
+        [N]
+        [D]
+[C] [M] [P]
+ 1   2   3
+The Elves just need to know which crate will end up on top of each stack; in this example, the top crates are C in stack 1, M in stack 2, and Z in stack 3, so you should combine these together and give the Elves the message CMZ.
+
+After the rearrangement procedure completes, what crate ends up on top of each stack?
+
+Your puzzle answer was LBLVVTVLP.
      */
     public static void main(String[] args) throws IOException {
-        Stack<String> sk1 = new Stack();
-        Stack<String> sk2 = new Stack();
-        Stack<String> sk3 = new Stack();
-        Stack<String> sk4 = new Stack();
-        Stack<String> sk5 = new Stack();
-        Stack<String> sk6 = new Stack();
-        Stack<String> sk7 = new Stack();
-        Stack<String> sk8 = new Stack();
-        Stack<String> sk9 = new Stack();
+        Stack<String> sk1 = new Stack<>();
+        Stack<String> sk2 = new Stack<>();
+        Stack<String> sk3 = new Stack<>();
+        Stack<String> sk4 = new Stack<>();
+        Stack<String> sk5 = new Stack<>();
+        Stack<String> sk6 = new Stack<>();
+        Stack<String> sk7 = new Stack<>();
+        Stack<String> sk8 = new Stack<>();
+        Stack<String> sk9 = new Stack<>();
 
         sk1.push("W");
         sk1.push("B");
@@ -49,7 +92,6 @@ public class Day05_1 {
         sk3.push("G");
         sk3.push("J");
         sk3.push("T");
-
 
         sk4.push("D");
         sk4.push("T");
@@ -115,13 +157,8 @@ public class Day05_1 {
         }
         input.close();
 
-        /*move 1 from 2 to 1
-        move 3 from 1 to 3
-        move 2 from 2 to 1
-        move 1 from 1 to 2*/
         String finalValue = performMovement(moveKeys, arrStacks);
         System.out.println("FinalValue:" + finalValue);
-        //1ST HWSVNZNDS
     }
 
     private static String performMovement(ArrayList<String> moveInstructions, ArrayList<Stack> arrStacks) {
@@ -132,29 +169,20 @@ public class Day05_1 {
         String[] insStr = null;
         String temp = null;
         for (String ins : moveInstructions) {
-            System.out.println(ins);
             insStr = ins.split("[\n\r\s]+");
-
             nos = Integer.parseInt(insStr[1]);
             from = Integer.parseInt(insStr[3]) - 1;
             to = Integer.parseInt(insStr[5]) - 1;
-
             for (int a = 0; a < nos; a++) {
                 temp = arrStacks.get(from).get(arrStacks.get(from).size() - 1).toString();
-
                 arrStacks.get(from).pop();
-
                 arrStacks.get(to).push(temp);
-                System.out.println("----");
-                System.out.println(arrStacks);
             }
-
         }
-              String finalValue= "";
-        for(int x= 0; x<arrStacks.size();x++) {
-           finalValue = finalValue + arrStacks.get(x).get(arrStacks.get(x).size()-1);
-        }                                                             
-
+        String finalValue = "";
+        for (int x = 0; x < arrStacks.size(); x++) {
+            finalValue = finalValue + arrStacks.get(x).get(arrStacks.get(x).size() - 1);
+        }
         return finalValue;
     }
 }
